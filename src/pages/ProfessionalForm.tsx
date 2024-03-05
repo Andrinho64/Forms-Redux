@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
 import Button from '../components/Button';
+import action from '../redux/actions';
 
 function ProfessionalForm() {
   const [form, setForm] = useState({
@@ -22,12 +24,16 @@ function ProfessionalForm() {
   };
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     if (form.resume
     && form.role
     && form.description
-    ) navigate('/form-display');
+    ) {
+      dispatch(action('professionalData', form));
+      navigate('/form-display');
+    }
   };
 
   return (

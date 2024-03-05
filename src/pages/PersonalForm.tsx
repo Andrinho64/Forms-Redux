@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import Select from '../components/Select';
+import action from '../redux/actions';
 
 const UF_LIST = [
   'Rio de Janeiro',
@@ -34,6 +36,7 @@ function PersonalForm() {
   };
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     if (form.name
@@ -42,7 +45,10 @@ function PersonalForm() {
     && form.address
     && form.city
     && form.uf
-    ) navigate('/professional-form');
+    ) {
+      dispatch(action('personalData', form));
+      navigate('/professional-form');
+    }
   };
 
   return (
