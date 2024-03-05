@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
 import Button from '../components/Button';
@@ -19,6 +19,15 @@ function ProfessionalForm() {
   ) => {
     const { name, value } = target;
     setForm({ ...form, [name]: value });
+  };
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (form.resume
+    && form.role
+    && form.description
+    ) navigate('/form-display');
   };
 
   return (
@@ -57,6 +66,7 @@ function ProfessionalForm() {
         type="submit"
         label="Enviar"
         moreClasses="is-fullwidth is-info"
+        onClick={ handleClick }
       />
     </form>
   );

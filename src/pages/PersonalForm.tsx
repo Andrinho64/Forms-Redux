@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import Select from '../components/Select';
@@ -29,7 +29,20 @@ function PersonalForm() {
     { target }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name: targetName, value } = target;
+    console.log('===>', form);
     setForm({ ...form, [targetName]: value });
+  };
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (form.name
+    && form.email
+    && form.cpf
+    && form.address
+    && form.city
+    && form.uf
+    ) navigate('/professional-form');
   };
 
   return (
@@ -92,6 +105,7 @@ function PersonalForm() {
         type="submit"
         label="Próximo"
         moreClasses="is-fullwidth is-info"
+        onClick={ handleClick }
       />
     </form>
   );
